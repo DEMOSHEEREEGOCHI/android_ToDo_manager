@@ -113,7 +113,7 @@ public class NetClient {
     public static void registration(JsonObject jsonObject, NetClientListener<JsonObject> netClientListener){
         instance.routes.registration(jsonObject).enqueue(createCallback(netClientListener));
     }
-    public static void getTodos(JsonObject jsonObject, NetClientListener<JsonObject> netClientListener){
-        instance.routes.getTodos(jsonObject).enqueue(createCallback(netClientListener));
+    public static void getTodos(String userId, NetClientListener<JsonObject> netClientListener){
+        instance.routes.getTodos(userId).enqueue(createCallback(netClientListener));
     }
 }

@@ -14,7 +14,6 @@ import com.example.myapplication.activities.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
-
     Button signUpButton;
     Button signInButton;
     EditText editTextTextPassword;

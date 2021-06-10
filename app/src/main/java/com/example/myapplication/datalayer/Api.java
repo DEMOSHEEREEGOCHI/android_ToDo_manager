@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface Api {
     @POST("user/login")
@@ -15,7 +16,15 @@ public interface Api {
     Call<JsonObject> registration(@Body JsonObject json);
 
     @GET("todos")
-    Call<JsonObject> getTodos(@Body JsonObject json);
+    Call<JsonObject> getTodos(@Query("userId") String userId);
+
+
+
+
+
+
+
+
 
 
 }
