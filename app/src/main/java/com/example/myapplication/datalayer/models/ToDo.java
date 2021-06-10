@@ -2,7 +2,7 @@ package com.example.myapplication.datalayer.models;
 
 public class ToDo {
    private String id;
-   private static String title;
+   private String title;
    private boolean isComplete;
 
     public String getId() {
@@ -13,7 +13,7 @@ public class ToDo {
         this.id = id;
     }
 
-    public static String getTitle() {
+    public String getTitle() {
         return title;
     }
 

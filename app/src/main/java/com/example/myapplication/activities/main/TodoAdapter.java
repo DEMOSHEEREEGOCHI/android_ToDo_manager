@@ -1,6 +1,7 @@
 package com.example.myapplication.activities.main;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.activities.login.LoginVM;
 import com.example.myapplication.datalayer.models.ToDo;
 
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ import java.util.List;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoViewHolder> {
 
-
+    private static final String TAG = TodoAdapter.class.getSimpleName();
 
     public interface OnItemClick {
         void onClick(String value);
@@ -70,6 +72,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoViewHolder
 
     class ToDoViewHolder extends RecyclerView.ViewHolder {
 
+        private TextView tvId;
         private TextView tvTitle;
         private ImageButton btnDelete;
         private CheckBox checkBox;
@@ -77,14 +80,16 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoViewHolder
         ToDoViewHolder(View itemView) {
             super(itemView);
 
+            tvId = itemView.findViewById(R.id.id);
             tvTitle = itemView.findViewById(R.id.title);
             checkBox = itemView.findViewById(R.id.checkbox);
             btnDelete = itemView.findViewById(R.id.btn_delete);
         }
 
         void bind( ToDo item) {
-
-                tvTitle.setText(ToDo.getTitle());
+                Log.d(TAG,"TITLE:"+item.getTitle());
+                tvTitle.setText(item.getTitle());
+                tvId.setText(item.getId());
                 checkBox.callOnClick();
                 btnDelete.setOnClickListener(v -> {
 
