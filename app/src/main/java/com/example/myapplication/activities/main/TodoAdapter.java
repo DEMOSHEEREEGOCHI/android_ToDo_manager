@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.activities.login.LoginVM;
+import com.example.myapplication.datalayer.NetClient;
 import com.example.myapplication.datalayer.models.ToDo;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,19 +26,19 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoViewHolder
 
     private static final String TAG = TodoAdapter.class.getSimpleName();
 
-    public interface OnItemClick {
-        void onClick(String value);
-    }
+//    public interface OnItemClick {
+//        void onClick(String value);
+//    }
 
     private List<ToDo> data;
-    private OnItemClick toggleChecked;
-    private OnItemClick deleteToDo;
+   // private OnItemClick toggleChecked;
+   // private OnItemClick deleteToDo;
 
 
-    public TodoAdapter(OnItemClick toggleChecked,OnItemClick deleteToDo) {
+    public TodoAdapter() {
         this.data = new ArrayList<>();
-        this.toggleChecked = toggleChecked;
-        this.deleteToDo = deleteToDo;
+//        this.toggleChecked = toggleChecked;
+//        this.deleteToDo = deleteToDo;
     }
 
 
@@ -91,8 +93,17 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoViewHolder
                 tvTitle.setText(item.getTitle());
                 tvId.setText(item.getId());
                 checkBox.callOnClick();
-                btnDelete.setOnClickListener(v -> {
-
+                btnDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                      String id =  tvId.getText().toString();
+                      NetClient.deleteToDoById(id, new NetClient.NetClientListener<JsonObject>() {
+                          @Override
+                          public void dataReady(JsonObject data) {
+                              Log.d(TAG,"DELETED!");
+                          }
+                      });
+                    }
                 });
 
 

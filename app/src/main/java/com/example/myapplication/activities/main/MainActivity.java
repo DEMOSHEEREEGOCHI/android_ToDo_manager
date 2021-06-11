@@ -41,20 +41,22 @@ public class MainActivity extends AppCompatActivity {
        //setInitialData();
         recyclerView = (RecyclerView) findViewById(R.id.list);
         // создаем адаптер
-         adapter = new TodoAdapter(
-                new TodoAdapter.OnItemClick() {
-                    @Override
-                    public void onClick(String value) {
-                    //MainVM.toggleChecked(String todoId)
-                    }
-                },
-                new TodoAdapter.OnItemClick() {
-                    @Override
-                    public void onClick(String value) {
-                        //MainVM.deleteToDo(String todoId)
-                    }
-                }
-        );
+        adapter = new TodoAdapter(
+//                new TodoAdapter.OnItemClick() {
+//                    @Override
+//                    public void onClick(String value) {
+//                    //MainVM.toggleChecked(String todoId)
+//                    }
+//                },
+//                new TodoAdapter.OnItemClick() {
+//                    @Override
+//                    public void onClick(String value) {
+//                        mainVM.deleteToDo();
+//
+//                    }
+//                }
+//
+               );
         // устанавливаем для списка адаптер
         recyclerView.setAdapter(adapter);
 

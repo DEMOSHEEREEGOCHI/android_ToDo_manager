@@ -48,4 +48,7 @@ public class MainVM extends AndroidViewModel {
             }
         });
     }
+    public void deleteToDo(ToDo todo){
+
+    }
 }

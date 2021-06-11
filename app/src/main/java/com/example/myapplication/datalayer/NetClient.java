@@ -116,4 +116,7 @@ public class NetClient {
     public static void getTodos(String userId, NetClientListener<JsonObject> netClientListener){
         instance.routes.getTodos(userId).enqueue(createCallback(netClientListener));
     }
+    public static void deleteToDoById(String id, NetClientListener<JsonObject> netClientListener){
+        instance.routes.deleteToDoById(id).enqueue(createCallback(netClientListener));
+    }
 }
