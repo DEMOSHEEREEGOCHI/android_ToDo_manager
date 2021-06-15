@@ -27,6 +27,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetClient {
 
     private static final String TAG = NetClient.class.getSimpleName();
+    private static final String ON_MARCH = "http://192.168.43.64:9000/api/";
+    private static final String HOME_CONNECT = "http://192.168.1.66:9000/api/";
 
     public interface NetClientListener<T> {
         void dataReady(T data);
@@ -60,7 +62,7 @@ public class NetClient {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl("http://192.168.1.66:9000/api/")
+                .baseUrl(HOME_CONNECT)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 

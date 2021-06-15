@@ -20,35 +20,44 @@ import java.util.List;
 
 public class MainVM extends AndroidViewModel {
     private static final String TAG = LoginVM.class.getSimpleName();
+
+    private MutableLiveData<List<ToDo>> toDoLiveList;
+    private String userId;
+
     public MainVM(@NonNull @NotNull Application application) {
         super(application);
     }
 
-    MutableLiveData<List<ToDo>> toDoLiveList;
+    public MainVM setUserId(String userId){
+        this.userId = userId;
+        return this;
+    }
 
-    public LiveData<List<ToDo>> getData(String userId) {
+    public LiveData<List<ToDo>> getData() {
         if (toDoLiveList == null) {
             toDoLiveList = new MutableLiveData<>();
-            loadData(userId);
+            loadData();
         }
         return toDoLiveList;
     }
 
-    private void loadData(String userId) {
-        //JsonObject jsonObject = new JsonObject();
-       // jsonObject.addProperty("userId",userId);
-
+    private void loadData() {
         NetClient.getTodos(userId, new NetClient.NetClientListener<JsonObject>() {
             @Override
             public void dataReady(JsonObject data) {
                 Log.d(TAG,"TODOS:"+data.get("todos").getAsJsonArray());
-                Log.d(TAG,"registration success!");
+                Log.d(TAG,"USER_ID:"+userId);
                 MainVM.this.toDoLiveList.postValue(ParseManager.jsonArrayToArrayList(data.get("todos").getAsJsonArray(),ToDo[].class));
-
             }
         });
     }
-    public void deleteToDo(ToDo todo){
-
+    public void deleteToDo(String id){
+        NetClient.deleteToDoById(id, new NetClient.NetClientListener<JsonObject>() {
+            @Override
+            public void dataReady(JsonObject data) {
+                Log.d(TAG,"DELETED!");
+                MainVM.this.loadData();
+            }
+        });
     }
 }

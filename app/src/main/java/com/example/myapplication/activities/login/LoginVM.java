@@ -51,12 +51,9 @@ public class LoginVM extends AndroidViewModel {
                 Log.d(TAG,"пользователь"+data.get("id").toString());
                 Log.d(TAG,"json:"+data.toString());
                 Intent intent = new Intent(context, MainActivity.class);
-                intent.putExtra("id",data.get("id").toString());
+                intent.putExtra("id",data.get("id").getAsString());
                 context.startActivity(intent);
-
             }
-
         });
-
     }
 }
