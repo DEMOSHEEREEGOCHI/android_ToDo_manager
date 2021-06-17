@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.datalayer.models.ToDo;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private MainVM mainVM;
     private RecyclerView recyclerView;
     private TabLayout tabLayout;
+    private FloatingActionButton floatingActionButton;
 
 
 

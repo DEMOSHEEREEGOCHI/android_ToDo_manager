@@ -23,6 +23,9 @@ public interface Api {
     @DELETE("todos/{id}")
     Call<JsonObject> deleteToDoById(@Path("id") String id);
 
+    @POST("todos/{id}")
+    Call<JsonObject> createToDo (@Body JsonObject json);
+
 
 
 
