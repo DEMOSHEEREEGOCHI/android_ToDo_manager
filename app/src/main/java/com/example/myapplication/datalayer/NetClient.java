@@ -124,4 +124,7 @@ public class NetClient {
     public static void createToDo(JsonObject jsonObject, NetClientListener<JsonObject> netClientListener){
         instance.routes.createToDo(jsonObject).enqueue(createCallback(netClientListener));
     }
+    public static void patchToDo(String id, NetClientListener<JsonObject> netClientListener){
+        instance.routes.patchToDo(id).enqueue(createCallback(netClientListener));
+    }
 }

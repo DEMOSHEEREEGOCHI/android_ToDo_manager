@@ -1,7 +1,11 @@
 package com.example.myapplication.activities.main;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -22,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TabLayout tabLayout;
     private FloatingActionButton floatingActionButton;
-
+    private CheckBox checkBox;
+    private Context context;
 
 
     @Override
@@ -50,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         Log.d(TAG,"ADAPTER SETTLED!");
         mainVM
-                .getData()
+                .initLiveDataList()
                 .observe(this, new Observer<List<ToDo>>() {
                     @Override
                     public void onChanged(List<ToDo> toDos) {
@@ -74,6 +79,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+        floatingActionButton = findViewById(R.id.floatingActionButton);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainVM.createToDo(MainActivity.this);
+
+            }
+        }
+        );
+        checkBox = findViewById(R.id.checkbox);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                
             }
         });
     }

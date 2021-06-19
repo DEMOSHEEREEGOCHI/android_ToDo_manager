@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -23,8 +24,11 @@ public interface Api {
     @DELETE("todos/{id}")
     Call<JsonObject> deleteToDoById(@Path("id") String id);
 
-    @POST("todos/{id}")
+    @POST("todos/")
     Call<JsonObject> createToDo (@Body JsonObject json);
+
+    @PATCH("todos/{id}")
+    Call<JsonObject> patchToDo(@Path("id") String id);
 
 
 

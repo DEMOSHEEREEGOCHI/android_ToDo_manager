@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
                 String login = editTextTextPersonName.getText().toString();
                 loginVM.login(login, password,LoginActivity.this);
 
-                //intent.putExtra("us",LoginVM.this.);
+
             }
         });
         signUpButton.setOnClickListener(new View.OnClickListener() {

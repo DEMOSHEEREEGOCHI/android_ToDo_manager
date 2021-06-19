@@ -25,9 +25,7 @@ public class LoginVM extends AndroidViewModel {
 
     }
 
-    public void getUserId(){
 
-    }
     public void registration(String login,String password){
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("username",login);
