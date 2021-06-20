@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -24,7 +25,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoViewHolder
     private static final String TAG = TodoAdapter.class.getSimpleName();
 
     public interface OnItemClick {
-        void onClick(String value);
+
+        void onClick(ToDo value);
     }
 
     private List<ToDo> data;
@@ -97,14 +99,19 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoViewHolder
             Log.d(TAG, "TITLE:" + item.getTitle());
             tvTitle.setText(item.getTitle());
             tvId.setText(item.getId());
-            checkBox.callOnClick();
+            checkBox.setChecked(item.isComplete());
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteToDoClick.onClick(item.getId());
+                    deleteToDoClick.onClick(item);
                 }
             });
-
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    toggleChecked.onClick(item);
+                }
+            });
 
         }
 

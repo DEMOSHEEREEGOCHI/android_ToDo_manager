@@ -44,8 +44,14 @@ public class MainActivity extends AppCompatActivity {
         adapter = new TodoAdapter();
         adapter.setDeleteToDoClick(new TodoAdapter.OnItemClick() {
             @Override
-            public void onClick(String value) {
-                mainVM.deleteToDo(value);
+            public void onClick(ToDo value) {
+                mainVM.deleteToDo(value.getId());
+            }
+        });
+        adapter.setToggleChecked(new TodoAdapter.OnItemClick() {
+            @Override
+            public void onClick(ToDo value) {
+                mainVM.patchToDo(value);
             }
         });
 
@@ -90,13 +96,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         );
-        checkBox = findViewById(R.id.checkbox);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                
-            }
-        });
+
+
     }
 
 }

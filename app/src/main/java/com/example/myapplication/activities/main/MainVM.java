@@ -91,4 +91,15 @@ public class MainVM extends AndroidViewModel {
         AlertDialog alert = builder.create();
         alert.show();
     }
+    public void patchToDo(ToDo todo){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("isComplete",!todo.isComplete());
+        NetClient.patchToDo(todo.getId(), jsonObject, new NetClient.NetClientListener<JsonObject>() {
+            @Override
+            public void dataReady(JsonObject data) {
+                Log.d(TAG,"PATCHED!");
+                MainVM.this.loadData();
+            }
+        });
+    }
 }

@@ -28,14 +28,7 @@ public interface Api {
     Call<JsonObject> createToDo (@Body JsonObject json);
 
     @PATCH("todos/{id}")
-    Call<JsonObject> patchToDo(@Path("id") String id);
-
-
-
-
-
-
-
+    Call<JsonObject> patchToDo(@Path("id") String id, @Body JsonObject json);
 
 
 
