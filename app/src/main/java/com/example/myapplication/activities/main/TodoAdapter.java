@@ -1,5 +1,6 @@
 package com.example.myapplication.activities.main;
 
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
@@ -17,6 +19,7 @@ import com.example.myapplication.datalayer.models.ToDo;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -67,12 +70,14 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoViewHolder
         return data.size();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void setData(List<ToDo> newData) {
         if (data != null) {
 
             data.clear();
             data.addAll(newData);
             notifyDataSetChanged();
+
         } else {
             // first initialization
             data = newData;
@@ -106,9 +111,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ToDoViewHolder
                     deleteToDoClick.onClick(item);
                 }
             });
-            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            checkBox.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                public void onClick(View v) {
                     toggleChecked.onClick(item);
                 }
             });

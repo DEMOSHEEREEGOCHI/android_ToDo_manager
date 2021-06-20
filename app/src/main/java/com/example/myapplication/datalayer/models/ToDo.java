@@ -2,12 +2,27 @@ package com.example.myapplication.datalayer.models;
 
 import android.content.Context;
 
+import java.util.Objects;
+
 public class ToDo {
    private String id;
    private String title;
    private boolean isComplete;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ToDo toDo = (ToDo) o;
+        return isComplete == toDo.isComplete &&
+                Objects.equals(id, toDo.id) &&
+                Objects.equals(title, toDo.title);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, isComplete);
+    }
 
     public String getId() {
         return id;

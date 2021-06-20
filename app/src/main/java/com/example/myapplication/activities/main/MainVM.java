@@ -20,6 +20,9 @@ import com.google.gson.JsonObject;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainVM extends AndroidViewModel {
@@ -51,11 +54,23 @@ public class MainVM extends AndroidViewModel {
             public void dataReady(JsonObject data) {
                 Log.d(TAG, "TODOS:" + data.get("todos").getAsJsonArray());
                 Log.d(TAG, "USER_ID:" + userId);
-                MainVM.this.toDoLiveList.postValue(ParseManager.jsonArrayToArrayList(data.get("todos").getAsJsonArray(), ToDo[].class));
+                ArrayList<ToDo> list = ParseManager.jsonArrayToArrayList(data.get("todos").getAsJsonArray(), ToDo[].class);
+                sortList(list);
+                MainVM.this.toDoLiveList.postValue(list);
             }
         });
     }
 
+    void sortList(ArrayList<ToDo> data){
+        Collections.sort(data,new Comparator<ToDo>(){
+            @Override
+            public int compare(ToDo o1, ToDo o2) {
+                if (o1.isComplete())return -1;
+                if (o2.isComplete())return 1;
+                else return 0;
+            }
+        });
+    }
     public void deleteToDo(String id) {
         NetClient.deleteToDoById(id, new NetClient.NetClientListener<JsonObject>() {
             @Override
@@ -65,6 +80,7 @@ public class MainVM extends AndroidViewModel {
             }
         });
     }
+
 
     public void createToDo(Context context) {
         final EditText input = new EditText(context);
