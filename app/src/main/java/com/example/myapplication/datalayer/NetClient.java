@@ -28,7 +28,7 @@ public class NetClient {
 
     private static final String TAG = NetClient.class.getSimpleName();
     private static final String ON_MARCH = "http://192.168.43.64:9000/api/";
-    private static final String HOME_CONNECT = "http://192.168.1.66:9000/api/";
+    private static final String HOME_CONNECT = "http://192.168.1.72:9000/api/";
 
     public interface NetClientListener<T> {
         void dataReady(T data);

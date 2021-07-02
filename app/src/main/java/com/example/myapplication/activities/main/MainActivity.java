@@ -1,12 +1,14 @@
 package com.example.myapplication.activities.main;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         mainVM
                 .initLiveDataList()
                 .observe(this, new Observer<List<ToDo>>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onChanged(List<ToDo> toDos) {
                         adapter.setData(toDos);
